@@ -18,13 +18,15 @@ public class Game {
         skillProducts[0] = new Product("SILA", 70);
         skillProducts[1] = new Product("OBRONA", 80);
         Scanner scan = new Scanner(System.in);
-        //  for (Product value : equipmentProducts) {
         String response;
-        for (int i = 0; i < 4; i++) {
+
+          for (Product value : equipmentProducts) {
+
+      //  for (int i = 0; i < 4; i++) {
 
 
             System.out.println("*******");
-            equipmentProducts[i].display();
+            value.display();
 
 
             System.out.println("Czy chcesz sprzedac ten przedmiot ? ");
@@ -33,7 +35,7 @@ public class Game {
 
             if (Objects.equals(response, "TAK")) {
                 System.out.println("Sprzedajesz przedmiot !");
-                heroes1.setMoney(equipmentProducts[i].getPrice() + heroes1.getMoney());
+                heroes1.setMoney(value.getPrice() + heroes1.getMoney());
 
             } else
                 System.out.println("Zostawiasz przedmiot !");
