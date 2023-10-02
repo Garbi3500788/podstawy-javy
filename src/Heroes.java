@@ -27,5 +27,11 @@ public class Heroes {
         System.out.println("Obrona:" + defend);
         System.out.println("Monety:" + money);
     }
+    public void setMoney (int updateMoney) {
+        money = updateMoney ;
+    }
+    int getMoney() {
+        return money;
+    }
 
 }
