@@ -27,11 +27,29 @@ public class Heroes {
         System.out.println("Obrona:" + defend);
         System.out.println("Monety:" + money);
     }
-    public void setMoney (int updateMoney) {
-        money = updateMoney ;
+
+    public void setMoney(int updateMoney) {
+        money = updateMoney;
     }
+
     int getMoney() {
         return money;
     }
 
+    public boolean checkMoney(int money) {
+
+        if (money >= 100) {
+            System.out.println("Mozesz zaczac kupowac sile i obrone");
+            return true;
+        } else return false;
+    }
+
+    public void setStrong(int updateStrong) {
+        strong = updateStrong;
+    }
+    public void setDefend(int updateDefend) {
+        defend = updateDefend;
+    }
 }
+
+
