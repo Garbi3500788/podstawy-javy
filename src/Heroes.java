@@ -20,8 +20,6 @@ public class Heroes {
     }
 
     public void display() {
-        String result;
-        result = "Do sklepu przychodzi heros" ;
 
         System.out.println("Do sklepu przychodzi heros:");
         System.out.println("Imie : " + name + " " + lastName);
