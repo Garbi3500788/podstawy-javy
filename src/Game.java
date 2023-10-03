@@ -1,69 +1,34 @@
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
 
 public class Game {
     public void startPlay() {
-        Heroes heroes1 = new Heroes("Joanna", "Odwazna", 0);
-        heroes1.display();
+        Heroes myHero = new Heroes("Joanna", "Odwazna", 0); // tworzenie domyslnego bohatera
+        myHero.display();//wyswietl stan bohatera
+        ArrayList<Item> equipmentItems = myHero.getItems(); //pobieram ekwipunek bohatera --  jak to zrobic lepiej / inaczej ? czy tworzyc get w klasie Heroes ? - musialem teraz zrobic public z polem items
+        myHero.sellItems() ;
 
-        Product[] equipmentProducts = new Product[4];
-
-// jak uporzadkowac cennik produktow
-        equipmentProducts[0] = new Product("ZBROJA", 10);
-        equipmentProducts[1] = new Product("MIECZ", 20);
-        equipmentProducts[2] = new Product("TARCZA", 30);
-        equipmentProducts[3] = new Product("HELM", 40);
-
-        Product[] skillProducts = new Product[2];
-        skillProducts[0] = new Product("SILA", 70);
-        skillProducts[1] = new Product("OBRONA", 80);
-        Scanner scan = new Scanner(System.in);
-        String response;
-
-          for (Product value : equipmentProducts) {
-
-      //  for (int i = 0; i < 4; i++) {
+        /*   Item[] skillItems = new Item[2];
+        skillItems[0] = new Item("SILA", 70);
+        skillItems[1] = new Item("OBRONA", 80);*/
 
 
-            System.out.println("*******");
-            value.display();
-
-
-            System.out.println("Czy chcesz sprzedac ten przedmiot ? ");
-
-            response = scan.next();
-
-            if (Objects.equals(response, "TAK")) {
-                System.out.println("Sprzedajesz przedmiot !");
-                heroes1.setMoney(value.getPrice() + heroes1.getMoney());
-
-            } else
-                System.out.println("Zostawiasz przedmiot !");
-
-            heroes1.display();
-        }
-
-        if (heroes1.checkMoney(heroes1.getMoney())) {
+       /* if (myHero.checkMoney(myHero.getMoney())) {
             System.out.println("Czy chcesz cos kupic ? ");
             response = scan.next();
             if (Objects.equals(response, "TAK")) {
-                for (Product value : skillProducts) {
+                for (Item value : skillItems) {
                     value.display();
                     System.out.println("Czy chcesz kupic ta  umiejetnosc ?(kosztuje :) " + value.getPrice());
                     response = scan.next();
                     if (Objects.equals(response, "TAK")) {
                         System.out.println("Kupujesz umiejetnosc !");
-
-
-                    } else
+                    } else {
                         System.out.println("Nie kupujesz umiejetnosc !");
+                    }
                 }
             }
-        }
-        ;
-
-        //   }
-
-
+        }*/
     }
 }
