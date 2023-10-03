@@ -1,3 +1,4 @@
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Random;
@@ -65,10 +66,10 @@ public class Heroes {
         defend = updateDefend;
     }
 
-    public void delEquipment(int elementEqiupment) {
-        System.out.println("Aktualny rozmiar tablicy :" + items.size()) ;
-        System.out.println("usuwam element :" + elementEqiupment);
-        items.remove(elementEqiupment);
+    public void delEquipment(Item item) {
+        //System.out.println("Aktualny rozmiar tablicy :" + items.size()) ;
+        //System.out.println("usuwam element :" + item);
+        items.remove(item);
 
     }
 
@@ -79,48 +80,77 @@ public class Heroes {
     public void sellItems() {
         Scanner scan = new Scanner(System.in);
         String response;
-        int[] delEqipments = new int[items.size()];
+        ArrayList<Item> delEqipments = new ArrayList<Item>();
         int counter = 0;
         for (int i = 0; i < items.size(); i++) { //po kazdym elemencie z aktualnego ekwipunku
-                System.out.println("*******");
-                items.get(i).display(); //wyswietl atrybuty ekwipunku
-                System.out.println("Czy chcesz sprzedac ten przedmiot ? ");
-                response = scan.next();
-                if (Objects.equals(response, "TAK")) {
-                    System.out.println("Sprzedajesz przedmiot !");
-                    setMoney(items.get(i).getPrice() + getMoney()); //zwiekszam atrybut Monety bohatera
-                    // delEquipment(i);    // usuwam sprzedany ekwipunek
-                    delEqipments[counter] = i;
-                    counter ++ ;
-                } else {
-                    System.out.println("Zostawiasz przedmiot !");
-                }
-        }
-        System.out.println("delEqipments.clone().length : " + delEqipments.clone().length);
-        System.out.println("delEqipments.length : " + delEqipments.length);
-
-        for (int i = 0; i < delEqipments.length; i++) {
-            System.out.println("Probuje usunac element listy : " + i);
-            delEquipment(i);
-            System.out.println("Usunieto elemt  listy : " + i);
-        }
-        System.out.println("Bohater po sprzedazy : ");
-        display();
-       /* for (Item equipmentItem : items) {
             System.out.println("*******");
-            equipmentItem.display(); //wyswietl atrybuty ekwipunku
+            items.get(i).display(); //wyswietl atrybuty ekwipunku
             System.out.println("Czy chcesz sprzedac ten przedmiot ? ");
             response = scan.next();
             if (Objects.equals(response, "TAK")) {
                 System.out.println("Sprzedajesz przedmiot !");
-                setMoney(equipmentItem.getPrice() + getMoney()); //zwiekszam atrybut Monety bohatera
-                //   delEquipment(items.indexOf(equipmentItem)) ;    // usuwam sprzedany ekwipunek
+                setMoney(items.get(i).getPrice() + getMoney()); //zwiekszam atrybut Monety bohatera
+                delEquipment(items.get(i));
+                i--;
+                counter++;
             } else {
                 System.out.println("Zostawiasz przedmiot !");
             }
-            display();
-        }*/
+        }
+
+        System.out.println("Bohater po sprzedazy : ");
+        display();
+
+    }
+
+    public void buyItems() {
+        Scanner scan = new Scanner(System.in);
+        String response;
+        ArrayList<Item> skillItems = new ArrayList<Item>();
+        skillItems.add(new Item("STRONG", 70));
+        skillItems.add(new Item("DEFEND", 80));
+        if (money != 0) {
+            System.out.println("Mozesz kupowac umiejetnosci. Czy chcesz kupic ?");
+            response = scan.next();
+            if (Objects.equals(response, "TAK")) {
+                for (int i = 0; i < skillItems.size(); i++) {
+                    System.out.println("ile mam przed kupnem: " + getMoney());
+                    System.out.println("cena :" + skillItems.get(i).getPrice());
+                    if (getMoney() >= skillItems.get(i).getPrice()) {
+                        skillItems.get(i).display(); //wyswietl co mozna kupic
+                        System.out.println("Czy chcesz kupic ten przedmiot ? ");
+                        response = scan.next();
+                        if (Objects.equals(response, "TAK")) {
+                            setSkill(skillItems.get(i).getProductName());
+                            setMoney(getMoney() - skillItems.get(i).getPrice()); //zmniejszam atrybut Monety bohatera
+                            System.out.println("ile mam po kupnie: " + getMoney());
+                        }
+                    } else {
+                        System.out.println("Niestety brak srodkow do kupowania");
+                    }
+                    display();
+                }
+            }
+        } else {
+            System.out.println("Niestety brak srodkow do kupowania");
+        }
+    }
+
+    private void displaySkill() {
+        System.out.println("Umiejetnosci bohatera : ");
+        System.out.println("Sila : " + strong);
+        System.out.println("Obrona : " + defend);
+    }
+
+    public void setSkill(String skillName) {
+        if (Objects.equals(skillName, "STRONG")) {
+            setStrong(strong + 31);
+        } else if (Objects.equals(skillName, "DEFEND")) {
+            setDefend(defend + 23);
+        }
     }
 }
+
+
 
 
