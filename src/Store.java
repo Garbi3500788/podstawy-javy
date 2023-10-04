@@ -1,14 +1,19 @@
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Store {
-    private String shopName;
+
     private ArrayList<Item> shopItems = new ArrayList<Item>();
 
-    public Store(String shopName) {
-        shopItems.add(new Item("STRONG", 70));
-        shopItems.add(new Item("DEFEND", 80));
+    public Store() {
+        shopItems.add(new Item("STRONG", 70,10));
+        shopItems.add(new Item("DEFEND", 70,15));
+        shopItems.add(new Item("ZBROJA", 10,20));
+        shopItems.add(new Item("MIECZ", 20,0));
+        shopItems.add(new Item("TARCZA", 30,0));
+        shopItems.add(new Item("HELM", 40,0));
     }
 
     public ArrayList<Item> getAssortment() {
