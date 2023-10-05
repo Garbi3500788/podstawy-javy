@@ -1,10 +1,12 @@
 public class Monster extends Person {
-    public int getSkills() {
-        return super.getSkills() + 2;
+    public Monster() {
+        name = "MONSTER";
+        strong = 1000;
+        defend = 1000;
+
     }
 
-    public Monster() {
-        name = "MONSTER" ;
-
+    public int getSkills() {
+        return super.getSkills() + 2;
     }
 }

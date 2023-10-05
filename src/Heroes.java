@@ -92,6 +92,9 @@ public class Heroes extends  Person{
     public void buyItems(Store skillStore) {
         System.out.println("Ilosc pieniendzy przed zakupami: " + money);
 
+        Random index  = new Random() ;
+        //index.
+
         for (Item skillItem : skillStore.getAssortment()) {
             skillItem.display(); //wyswietl co mozna kupic
             if (money < skillItem.getProductPrice()) {
