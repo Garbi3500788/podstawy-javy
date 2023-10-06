@@ -1,28 +1,37 @@
 package kwiaciarnia;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class Customer {
     private String name;
     private double money;
-    private ShoppingCart sC;
-
-    private List<Flower> myBox = new ArrayList<Flower>();
+    private ShoppingCart shoppingCart;
+    private LinkedList<Flower> myBox;
 
     public Customer(String name, double money) {
         this.name = name;
         this.money = money;
-        sC = new ShoppingCart(name);
+        shoppingCart = new ShoppingCart(name);
+        myBox = new LinkedList<>();
     }
 
-    public void add(Flower flower) {
-        sC.addToCart((flower));
+    public void addToCart(Flower flower) {
+        shoppingCart.addToCart((flower));
     }
+    public void pay() {
+        Set<Flower> delElements = new HashSet<Flower>();
+        for (Flower flower : shoppingCart.getShoppingCart().getShopping()) {
+            if (flower.getPrice() == -1 || money < flower.getTotalPrice()) {
+                delElements.add(flower);
+            } else {
+                money -= flower.getTotalPrice();
+            }
+        }
+        shoppingCart.remove(delElements);
 
+    }
     public ShoppingCart getShoppingCart() {
-        return sC.getShoppingCart();
+        return shoppingCart;
     }
 
     public String getName() {
@@ -33,30 +42,13 @@ public class Customer {
         return money;
     }
 
-    public void pay() {
-        ArrayList<PricePosition> pp = PriceList.getInstance().getPrices();
-        for (int i = 0; i < sC.getShoppingCart().getShopping().size(); i++) { // iteracja po produktach w koszyku
-            for (int j = 0; j < pp.size(); j++) {   //iteracja po produktach na liscie cen
-                if (Objects.equals(sC.getShoppingCart().getShopping().get(i).getName(), pp.get(j).getFlowerName()) && money >= pp.get(j).getFlowerPrice()*sC.getShoppingCart().getShopping().get(i).getCount()) { //nazwa produktu znajduje sie na liscie i klient ma kase na ten produkt
-                    money = money - sC.getShoppingCart().getShopping().get(i).getPrice(); // stac mnie na zakupc tej ilosci kwiatow co mam w koszyku
-                }else {
-                    sC.getShoppingCart().getShopping().remove(i);           // usuwam  z koszyka
-                }
-
-            }
-        }
-    }
 
     public void pack(Box box) {
-        for (int i = 0; i < sC.getShoppingCart().getShopping().size(); i++) {
-            myBox.add(sC.getShoppingCart().getShopping().get(i));//doodaje do pudelka
-            sC.getShoppingCart().getShopping().remove(i);           // usuwam  z koszyka
-
-            i--;
-        }
+        myBox.addAll(shoppingCart.getShoppingCart().getShopping());
+        shoppingCart.clearCard();
     }
 
-    public List<Flower> getBox() {
+    public LinkedList<Flower> getBox() {
         return myBox;
     }
 

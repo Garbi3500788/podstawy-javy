@@ -1,19 +1,19 @@
 package kwiaciarnia;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class ShoppingCart  {
-    private List<Flower> shoppingCart = new ArrayList<Flower>();
-
+    private LinkedList<Flower> shoppingCart = new LinkedList<>() ;
     String name ;
-
     public ShoppingCart(String name) {
         this.name = name ;
     }
 
     public void addToCart(Flower flower) {
         shoppingCart.add(flower);
+    }
+    public void clearCard(){
+        shoppingCart.clear();
     }
     public ShoppingCart getShoppingCart() {
         return this;
@@ -24,12 +24,23 @@ public class ShoppingCart  {
         String result;
         result = "Wozek wlasciciel : " +  name + "\n";
         for (Flower flower : shoppingCart) {
-            result = result + flower.getName() + " kolor : " + flower.getColour() + " ilosc : " + flower.getCount() + " cena : " + flower.getPrice();
+            result = result + flower.getName() + " kolor : " + flower.getColour() + " ilosc : " + flower.getCount() + " cena : " + flower.getPrice()+ "\n";
 
         }
         return result;
     }
-    public List<Flower> getShopping   () {
-        return shoppingCart ;
+    public LinkedList<Flower> getShopping   () {
+        return new LinkedList<>(shoppingCart) ;
+    }
+    /*public List<Flower> getShopping2   () {
+        return Collections.unmodifiableList(shoppingCart);
+    }*/
+    public void remove(Set<Flower> flowersToRemove){
+        shoppingCart.removeAll(flowersToRemove) ;
+    }
+
+    public void x () {
+        LinkedList<String> l = new LinkedList() ;
+
     }
 }

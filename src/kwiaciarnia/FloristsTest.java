@@ -1,11 +1,9 @@
 package kwiaciarnia;
 
-import java.util.ArrayList;
-
 public class FloristsTest {
     // definicja metody sumowania wartosci kwiatów o podanym kolorze
-    static int valueOf(Box box, String color) {
-        return 0  ;
+    static double valueOf(Box box, String color) {
+      return  box.getCountFlower(color) ;
     }
 
     public static void main(String[] args) {
@@ -23,10 +21,10 @@ public class FloristsTest {
         Customer janek = new Customer("Janek", 200);
 
         // Bierze różne kwiaty: 5 róż, 5 piwonii, 3 frezje, 3 bzy
-        janek.add(new Rose(5));
-        janek.add(new Peony(5));
-        janek.add(new Freesia(3));
-        janek.add(new Lilac(3));
+        janek.addToCart(new Rose(5)); //róża
+        janek.addToCart(new Peony(5)); //piwonia
+        janek.addToCart(new Freesia(3)); //frezja
+        janek.addToCart(new Lilac(3)); //bez
 
         // Pewnie je umieścił na wózku sklepowyem
         // Zobaczmy co tam ma
@@ -59,7 +57,7 @@ public class FloristsTest {
 
         // a co w pudełku
         System.out.println(pudelkoJanka);
-/*
+
         // Zobaczmy jaka jest wartość czerwonych kwiatów w pudełku Janka
         System.out.println("Czerwone kwiaty w pudełku Janka kosztowały: "
                 + valueOf(pudelkoJanka, "czerwony"));
@@ -69,8 +67,8 @@ public class FloristsTest {
         Customer stefan = new Customer("Stefan", 60);
 
         // Ale nabrał kwiatów nieco za dużo jak na tę sumę
-        stefan.add(new Lilac(3));
-        stefan.add(new Rose(5));
+        stefan.addToCart(new Lilac(3)); //bez
+        stefan.addToCart(new Rose(5));  // roza
 
         // co ma w wózku
         System.out.println(stefan.getShoppingCart());
@@ -83,7 +81,7 @@ public class FloristsTest {
         // co ostatecznie udało mu się kupić
         System.out.println(pudelkoStefana);
         // ... i ile zostało mu pieniędzy
-        System.out.println("Stefanowi zostało : " + stefan.getCash() + " zł");*/
+        System.out.println("Stefanowi zostało : " + stefan.getCash() + " zł");
     }
 }
 
